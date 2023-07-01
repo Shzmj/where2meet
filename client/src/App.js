@@ -20,6 +20,30 @@ import {basicTheme} from "./theme.js";
 
 function App() {
   
+  const listItem = (
+    <div>
+      <ListItem>
+      {/* <ListItemIcon>
+        <AccountCircleIcon/>
+      </ListItemIcon> */}
+      <Accordion square={true}>
+      <AccordionSummary
+      expandIcon={<ExpandMoreIcon />}
+      >
+        <Typography>asdf</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Typography>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+          malesuada lacus ex, sit amet blandit leo lobortis eget.
+        </Typography>
+      </AccordionDetails>
+      </Accordion>
+    </ListItem>
+    <Divider/>
+    </div>
+  );
+
   const drawer = (
     <div>
         <Drawer
@@ -35,28 +59,8 @@ function App() {
         <Paper variant="outlined">
         <React.Fragment>
           <List>
-            <ListItem>
-              {/* <ListItemIcon>
-                <AccountCircleIcon/>
-              </ListItemIcon> */}
-              <Accordion square={true}>
-              <AccordionSummary
-              expandIcon={<ExpandMoreIcon />}
-              sx={{width: {sm: "240px"}}}
-              >
-                <Typography>asdf</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-                  malesuada lacus ex, sit amet blandit leo lobortis eget.
-                </Typography>
-              </AccordionDetails>
-              </Accordion>
-            </ListItem>
-            <ListItem>
-              qwer
-            </ListItem>
+            {listItem}
+            {listItem}
           </List>
         </React.Fragment>
         </Paper>
