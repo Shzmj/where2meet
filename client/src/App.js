@@ -9,6 +9,8 @@ import sideDrawer from "./sideDrawer.js"
 
 import {basicTheme, appBarHeight, drawerWIdth} from "./theme.js";
 
+import OurGoogleMaps from "./google_maps.js"
+
 function App() {
 
   return (
@@ -31,6 +33,7 @@ function App() {
           {sideDrawer()}
         <TextField>
         </TextField>
+        <OurGoogleMaps />
       </ThemeProvider>
     </div>
   );
