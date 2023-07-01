@@ -1,7 +1,7 @@
 import { useMemo, useCallback, useRef, useState } from "react";
 import { GoogleMap, useLoadScript, MarkerF, Circle } from "@react-google-maps/api";
 import RoomIcon from '@mui/icons-material/Room';
-import Places from "./places";
+import { points, center } from '@turf/turf';
 
 export default function OurGoogleMaps() {
 
@@ -19,7 +19,7 @@ export default function OurGoogleMaps() {
 
 //renders google map using markers.
 function Map() {
-	const [center, setCenter] = useState({ lat: -33.78827854, lng: -209.5010376 });
+	const [centerPoint, setCenter] = useState({ lat: -33.78827854, lng: -209.5010376 });
 	const mapRef = useRef();
 	const options = useMemo(
 		() => ({
@@ -35,16 +35,32 @@ function Map() {
 	const coogeeBeach = useMemo(() => ({ lat: -33.921355, lng: -208.741788 }), []);
 
 
+	// add implementation to fetch locations from db
+	const coordinates = [
+		[-74.0060, 40.7128],
+		[-118.2437, 34.0522],
+		[-0.1278, 51.5074],
+	];
+
+
+	// need to find central point of all the locations
+	const allPoint = points(coordinates);
+	const centroid = center(allPoint);
+	const centralCoordinate = center.geometry.coordinates;
+	const [longitude, latitude] = centralCoordinate;
+	console.log(longitude, latitude)
+
+	// make api call
+	// https://maps.googleapis.com/maps/api/place/nearbysearch/output?parameters
+
+
+
 	return (
 		<>
-			<Places setCenter={(position) => {
-				setCenter(position);
-				mapRef.current.panTo(position);
-			}} />
 			<div className="map">
 				<GoogleMap
 					zoom={10}
-					center={center}
+					center={centerPoint}
 					mapContainerClassName="map-container"
 					options={options}
 					onLoad={onLoad}
