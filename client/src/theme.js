@@ -2,6 +2,9 @@ import {
     ThemeOptions, createTheme,
   } from "@mui/material/styles";
 
+export const appBarHeight = 75;
+export const drawerWIdth = 320;
+
 export const basicTheme = createTheme({
     palette: {
       mode: 'light',
@@ -13,14 +16,39 @@ export const basicTheme = createTheme({
       },
     },
     components: {
-      MuiAccordionSquare: {
+      MuiAccordion: {
         styleOverrides: {
           root: {
-            backgroundColor: "#36393f",
-            color: "#ffffff",
-            "&.Mui-focused": {
-              backgroundColor: "#0e0e10",
-            },
+            boxShadow: "none",
+          },
+        },
+      },
+      MuiAccordionSummary: {
+        styleOverrides: {
+          root: {
+            width: `${drawerWIdth}px`,
+          },
+        },
+      },
+      MuiListItem: {
+        styleOverrides: {
+          root: {
+            padding: "0px"
+          }
+        }
+      },
+      MuiList: {
+        styleOverrides: {
+          root: {
+            paddingTop: "0px",
+            paddingBottom: "0px",
+          }
+        }
+      },
+      MuiSvgIcon: {
+        styleOverrides: {
+          root: {
+            // color: "#45dc92",
           },
         },
       },
