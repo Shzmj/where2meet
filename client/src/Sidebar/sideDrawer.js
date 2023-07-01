@@ -5,7 +5,8 @@ import {Toolbar, Paper,
 import listItem from "./listItem.js";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import makeGroup from "./makeGroup.js";
-import { appBarHeight, drawerWIdth } from './theme.js';
+import friendList from "./friendList.js";
+import { appBarHeight, drawerWIdth } from '../theme.js';
 
 export default function sideDrawer() {
     
@@ -25,7 +26,16 @@ export default function sideDrawer() {
           <React.Fragment>
             <List>
               {listItem("New Group", makeGroup())}
-              {listItem(<ExpandMoreIcon/>)}
+              {listItem("Friends", friendList([
+                {
+                  "name": "shaam",
+                  "preferences": "farding shidding and pooping"
+                },
+                {
+                  "name": "shubh",
+                  "preferences": "being a fat fatty"
+                }
+              ]))}
             </List>
           </React.Fragment>
           </Paper>
