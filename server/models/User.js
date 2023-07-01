@@ -1,29 +1,6 @@
 import mongoose from "mongoose";
-const GroupSchema = mongoose.Schema(
-    {
-        sessionId: {
-            type: String,
-            required: true
-        }, 
-        groupAdmin: {
-            type: String,
-            required: true
-        },
-        users: [{
-            username: {
-                type: String
-            },
-            location: {
-                type: String
-            }
-        }],
-        eventTypes: [{
-            type: String
-        }]
-    }
-)
 
-const userSchema = mongoose.Schema(
+const UserSchema = mongoose.Schema(
     {
         username: {
             type: String,
@@ -35,3 +12,4 @@ const userSchema = mongoose.Schema(
         }
     }
 )
+export default mongoose.model('User', UserSchema, 'user');
