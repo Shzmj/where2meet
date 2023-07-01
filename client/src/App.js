@@ -7,7 +7,7 @@ import {
 
 import sideDrawer from "./sideDrawer.js"
 
-import {basicTheme} from "./theme.js";
+import {basicTheme, appBarHeight, drawerWIdth} from "./theme.js";
 
 function App() {
 
@@ -17,11 +17,11 @@ function App() {
         <AppBar 
           position="fixed"
           sx={{
-            width: { sm: `calc(100% - ${240}px)` },
-            height: {sm: '75px'},
-            ml: { sm: `${240}px` },
+            width: { sm: `calc(100% - ${drawerWIdth}px)` },
+            height: {sm: `${appBarHeight}px`},
+            ml: { sm: `${drawerWIdth}px` },
           }}>
-          <Toolbar sx={{height: {sm: "75px"}}}>
+          <Toolbar sx={{height: {sm: `${appBarHeight}px`}}}>
             <Typography variant="h4">
               Triangular
             </Typography>

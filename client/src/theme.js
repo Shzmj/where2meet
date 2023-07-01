@@ -2,6 +2,9 @@ import {
     ThemeOptions, createTheme,
   } from "@mui/material/styles";
 
+export const appBarHeight = 75;
+export const drawerWIdth = 320;
+
 export const basicTheme = createTheme({
     palette: {
       mode: 'light',
@@ -23,7 +26,7 @@ export const basicTheme = createTheme({
       MuiAccordionSummary: {
         styleOverrides: {
           root: {
-            width: "240px",
+            width: `${drawerWIdth}px`,
           },
         },
       },
