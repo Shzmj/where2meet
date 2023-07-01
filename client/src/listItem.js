@@ -7,10 +7,10 @@ export default function listItem(name, component) {
     return (
         <div>
           <ListItem>
-          {/* <ListItemIcon>
+          <ListItemIcon>
             <AccountCircleIcon/>
-          </ListItemIcon> */}
-          <Accordion square={true}>
+          </ListItemIcon>
+          {/* <Accordion square={true}>
           <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           >
@@ -19,7 +19,7 @@ export default function listItem(name, component) {
           <AccordionDetails>
             {component}
           </AccordionDetails>
-          </Accordion>
+          </Accordion> */}
         </ListItem>
         <Divider/>
         </div>
