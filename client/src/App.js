@@ -16,57 +16,11 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import MenuIcon from "@mui/icons-material/Menu";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
+import sideDrawer from "./sideDrawer.js"
+
 import {basicTheme} from "./theme.js";
 
 function App() {
-  
-  const listItem = (
-    <div>
-      <ListItem>
-      {/* <ListItemIcon>
-        <AccountCircleIcon/>
-      </ListItemIcon> */}
-      <Accordion square={true}>
-      <AccordionSummary
-      expandIcon={<ExpandMoreIcon />}
-      >
-        <Typography>asdf</Typography>
-      </AccordionSummary>
-      <AccordionDetails>
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </Typography>
-      </AccordionDetails>
-      </Accordion>
-    </ListItem>
-    <Divider/>
-    </div>
-  );
-
-  const drawer = (
-    <div>
-        <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
-          }}
-          open
-        >
-        <Toolbar sx={{height: {sm: "75px"}}}/>
-        <Divider/>
-        <Paper variant="outlined">
-        <React.Fragment>
-          <List>
-            {listItem}
-            {listItem}
-          </List>
-        </React.Fragment>
-        </Paper>
-      </Drawer>
-    </div>
-  );
 
   return (
     <div className="App">
@@ -85,7 +39,7 @@ function App() {
           </Toolbar>
         </AppBar>
         <Divider/>
-          {drawer}
+          {sideDrawer()}
         <TextField>
         </TextField>
       </ThemeProvider>
