@@ -22,7 +22,8 @@ function Map() {
 	const northEastHarbour = useMemo(() => ({ lat: -33.845184, lng: -208.772438 }), []);
 	const coogeeBeach = useMemo(() => ({ lat: -33.921355, lng: -208.741788 }), []);
 
-	return <GoogleMap
+	return <div className="map">
+		<GoogleMap
 		zoom={10}
 		center={{ lat: -33.78827854, lng: -209.5010376 }}
 		mapContainerClassName="map-container"
@@ -31,4 +32,5 @@ function Map() {
 		<MarkerF position={northEastHarbour} icon={RoomIcon} />
 		<MarkerF position={coogeeBeach} icon={RoomIcon} />
 	</GoogleMap>
+	</div>
 }

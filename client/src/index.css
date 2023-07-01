@@ -12,10 +12,12 @@ code {
     monospace;
 }
 
+.map {
+  width: 70%;
+  height: 100vh;
+}
 
 .map-container {
-  width: 50%;
-  height: 50vh;
-  right: 0px;
-  bottom: 0px;
+  width: 100%;
+  height: 100vh;
 }
