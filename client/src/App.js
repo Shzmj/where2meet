@@ -18,6 +18,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import {basicTheme} from "./theme.js";
 
+import OurGoogleMaps from "./google_maps.js"
+
 function App() {
   
   const drawer = (
@@ -84,6 +86,7 @@ function App() {
           {drawer}
         <TextField>
         </TextField>
+        <OurGoogleMaps />
       </ThemeProvider>
     </div>
   );
