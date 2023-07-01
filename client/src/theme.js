@@ -12,4 +12,17 @@ export const basicTheme = createTheme({
         main: '#f50057',
       },
     },
+    components: {
+      MuiAccordionSquare: {
+        styleOverrides: {
+          root: {
+            backgroundColor: "#36393f",
+            color: "#ffffff",
+            "&.Mui-focused": {
+              backgroundColor: "#0e0e10",
+            },
+          },
+        },
+      },
+    }
   });
