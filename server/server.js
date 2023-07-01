@@ -61,28 +61,70 @@ app.post('/createUser', async (req, res) => {
     }
   });
   
-
+// Adds first user to the database AND creates a new group
+// From the body this function expects:
+// username, groupName, location, events (an array of strings)
 app.post('/createGroup', async (req, res) => {
     // Generate a new Id
     const newId = uuidv4().slice(0, 10);
 
-    const group = new User({
+    const group = new Group({
         sessionId: newId,
-        groupAdmin: '',
-        users: [],
-        eventTypes: []
+        groupName: req.body.groupName,
+        groupAdmin: req.body.username,
+        users: [req.body.username],
+        eventTypes: [req.body.events]
     });
+
+    const user = new User({
+        username: req.body.username,
+        location: req.body.location
+      });
 
     // Save the group to the database
     try {
         await group.save();
-        res.status(200).json({ msg: 'Group created successfully', id: newId, group: group});
+        await user.save();
+        res.status(200).json({ msg: 'Group created successfully', id: newId, group: group, user: user});
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to create group' });
     }
 });
 
+
+// getUsers endpoint
+app.get('/getUsers', async (req, res) => {
+    try {
+      const { sessionId } = req.query;
+  
+      // Find the group based on the sessionId
+      const group = await Group.findOne({ sessionId: sessionId });
+
+      if (!group) {
+        return res.status(404).json({ message: 'Group not found' });
+      }
+
+      // Extract the users from the group
+      const users = group.users;
+  
+      res.status(200).send(users);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
+
+// getEvents
+app.get('/getEvents', async (req, res) => {
+    try {
+        let events = ['Restaurants', 'Hike Trails', 'Bowling', 'Clubs', 'Laser tag',
+                      'Sport centres']
+        res.status(200).json({ events: events });
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
 
 
 

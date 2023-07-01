@@ -6,6 +6,10 @@ const GroupSchema = mongoose.Schema(
             type: String,
             required: true
         }, 
+        groupName: {
+            type: String,
+            required: true
+        },
         groupAdmin: {
             type: String,
             required: true
