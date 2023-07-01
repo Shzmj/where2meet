@@ -1,23 +1,51 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import {AppBar, Toolbar, TextField, 
+  IconButton, Typography, Paper, 
+  List, ListItem, Drawer} from "@mui/material";
+import {
+  experimental_sx as sx,
+  ThemeProvider,
+  ThemeOptions,
+  createTheme,
+} from "@mui/material/styles";
+
+import {basicTheme} from "./theme.js";
 
 function App() {
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={basicTheme}>
+        <AppBar position="static">
+          <Toolbar variant="dense">
+            <IconButton edge="start"  aria-label="menu">
+            </IconButton>
+            <Typography variant="h5" sx={{"fontWeight": "bold"}}>
+              Triangular
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent">
+          <Paper variant="outlined">
+          <React.Fragment>
+            <List>
+              <ListItem>
+                asd
+              </ListItem>
+              <ListItem>
+                qwer
+              </ListItem>
+            </List>
+          </React.Fragment>
+          </Paper>
+        </Drawer>
+        <TextField>
+
+        </TextField>
+      </ThemeProvider>
     </div>
   );
 }
