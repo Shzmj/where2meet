@@ -1,11 +1,11 @@
 import React from "react";
 
-import {TextField, Typography, Checkbox, FormControlLabel} from "@mui/material";
+import {TextField, Typography, Checkbox, FormControlLabel, Box} from "@mui/material";
 
 export default function makeGroup() {
 
     return (
-        <div>
+        <Box sx={{ml: 1.5}}>
             <Typography
             variant="h6"
             >
@@ -48,6 +48,6 @@ export default function makeGroup() {
             control={<Checkbox/>}
             >
             </FormControlLabel>
-        </div>
+        </Box>
     );
 }
