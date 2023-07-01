@@ -47,20 +47,20 @@ app.use(express.json());
 
 app.post('/createUser', async (req, res) => {
     try {
-      const user = new User({
-        username: req.body.username,
-        location: req.body.location
-      });
-  
-      await user.save();
+        const user = new User({
+            username: req.body.username,
+            location: req.body.location
+        });
 
-      res.status(200).json({ msg: 'User created successfully', user: user});
+        await user.save();
+
+        res.status(200).json({ msg: 'User created successfully', user: user });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Failed to create user' });
+        console.error(error);
+        res.status(500).json({ error: 'Failed to create user' });
     }
-  });
-  
+});
+
 // Adds first user to the database AND creates a new group
 // From the body this function expects:
 // username, groupName, location, events (an array of strings)
@@ -79,13 +79,13 @@ app.post('/createGroup', async (req, res) => {
     const user = new User({
         username: req.body.username,
         location: req.body.location
-      });
+    });
 
     // Save the group to the database
     try {
         await group.save();
         await user.save();
-        res.status(200).json({ msg: 'Group created successfully', id: newId, group: group, user: user});
+        res.status(200).json({ msg: 'Group created successfully', id: newId, group: group, user: user });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'Failed to create group' });
@@ -96,35 +96,35 @@ app.post('/createGroup', async (req, res) => {
 // getUsers endpoint
 app.get('/getUsers', async (req, res) => {
     try {
-      const { sessionId } = req.query;
-  
-      // Find the group based on the sessionId
-      const group = await Group.findOne({ sessionId: sessionId });
+        const { sessionId } = req.query;
 
-      if (!group) {
-        return res.status(404).json({ message: 'Group not found' });
-      }
+        // Find the group based on the sessionId
+        const group = await Group.findOne({ sessionId: sessionId });
 
-      // Extract the users from the group
-      const users = group.users;
-  
-      res.status(200).send(users);
+        if (!group) {
+            return res.status(404).json({ message: 'Group not found' });
+        }
+
+        // Extract the users from the group
+        const users = group.users;
+
+        res.status(200).send(users);
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error' });
     }
-  });
+});
 
 
 // getEvents
 app.get('/getEvents', async (req, res) => {
     try {
         let events = ['Restaurants', 'Hike Trails', 'Bowling', 'Clubs', 'Laser tag',
-                      'Sport centres']
+            'Sport centres']
         res.status(200).json({ events: events });
     } catch (error) {
-      res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error' });
     }
-  });
+});
 
 
 
