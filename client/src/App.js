@@ -15,9 +15,10 @@ function App() {
             width: { sm: `calc(100% - ${drawerWIdth}px)` },
             height: { sm: `${appBarHeight}px` },
             ml: { sm: `${drawerWIdth}px` },
+            zIndex: 1500
           }}
         >
-          <Toolbar sx={{ height: { sm: `${appBarHeight}px` } }}>
+          <Toolbar sx={{ height: { sm: `${appBarHeight}px` }, position: "absolute", zIndex: 9 }}>
             <Typography variant="h4">Triangular</Typography>
           </Toolbar>
         </AppBar>
