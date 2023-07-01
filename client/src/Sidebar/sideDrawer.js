@@ -20,9 +20,9 @@ export default function sideDrawer() {
             }}
             open
           >
-          <Toolbar sx={{height: {sm: appBarHeight}}}/>
-          <Divider/>
-          <Paper variant="outlined">
+          {/* <Toolbar sx={{height: {sm: appBarHeight}}}/> */}
+          <Divider sx={{height: {sm: appBarHeight}}}/>
+          <Paper>
           <React.Fragment>
             <List>
               {listItem("New Group", makeGroup())}

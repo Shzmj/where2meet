@@ -23,7 +23,7 @@ export default function friendList(friendList) {
                     >
                         Preferences - 
                     </Typography>
-                    {preferences}
+                    {` ${preferences}`}
                     </React.Fragment>
                 }
                 />
