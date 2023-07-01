@@ -1,12 +1,11 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
 import { v4 as uuidv4 } from 'uuid';
 import User from './models/User.js';
 import Group from './models/Group.js'
 
-
-const dotenv = require('dotenv');
+import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
