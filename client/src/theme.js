@@ -5,11 +5,13 @@ import {
 export const appBarHeight = 75;
 export const drawerWIdth = "30%";
 
+export const primaryColor = "#45dc92";
+
 export const basicTheme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#45dc92',
+      main: primaryColor,
     },
     secondary: {
       main: '#f50057',
@@ -33,7 +35,7 @@ export const basicTheme = createTheme({
     MuiListItem: {
       styleOverrides: {
         root: {
-          padding: "0px"
+          padding: "0px",
         }
       }
     },

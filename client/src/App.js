@@ -1,7 +1,7 @@
 import React from 'react';
 import { AppBar, Toolbar, TextField, Typography, Divider, Grid } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import sideDrawer from "./sideDrawer.js";
+import sideDrawer from "./Sidebar/sideDrawer.js";
 import { basicTheme, appBarHeight, drawerWIdth } from "./theme.js";
 import OurGoogleMaps from "./google_maps.js";
 
