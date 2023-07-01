@@ -3,7 +3,7 @@ import {Typography, ListItem, Divider,
     Accordion, AccordionSummary, AccordionDetails} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-export default function listItem() {
+export default function listItem(component) {
     return (
         <div>
           <ListItem>
@@ -21,6 +21,7 @@ export default function listItem() {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
               malesuada lacus ex, sit amet blandit leo lobortis eget.
             </Typography>
+            {component}
           </AccordionDetails>
           </Accordion>
         </ListItem>

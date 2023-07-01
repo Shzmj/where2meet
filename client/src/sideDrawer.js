@@ -3,6 +3,7 @@ import {Toolbar, Paper,
   List, Drawer, Divider} from "@mui/material";
 
 import listItem from "./listItem.js";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function sideDrawer() {
     
@@ -21,8 +22,8 @@ export default function sideDrawer() {
           <Paper variant="outlined">
           <React.Fragment>
             <List>
-              {listItem()}
-              {listItem()}
+              {listItem(<ExpandMoreIcon/>)}
+              {listItem(<ExpandMoreIcon/>)}
             </List>
           </React.Fragment>
           </Paper>
