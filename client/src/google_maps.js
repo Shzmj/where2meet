@@ -10,6 +10,10 @@ import yellow_marker from "./yellow_marker.png"
 
 export default function OurGoogleMaps() {
 
+
+	console.log("hi")
+	console.log(process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY);
+
 	//loads map using Manav's hidden API key.
 	const { isLoaded } = useLoadScript({
 		googleMapsApiKey: process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY,
@@ -32,7 +36,45 @@ function Map() {
 		}),
 		[]
 	);
-	const onLoad = useCallback((map) => (mapRef.current = map), []);
+
+
+	// TODO: add implementation to fetch locations from mongodb
+	//first and last coords need to be the same
+	const coordinates = [
+		[-33.680640, -209.698501],
+		[-33.845184, -208.772438],
+		[-33.921355, -208.741788],
+		[-33.680640, -209.698501]
+	];
+	// finds central point of all the locations
+	var polygon = turf.polygon([coordinates]);
+	var centroid = turf.centroid(polygon);
+	console.log(centroid.geometry.coordinates);
+	const centroid_memo = useMemo(() => ({ lat: centroid.geometry.coordinates[0], lng: centroid.geometry.coordinates[1] }), [centroid.geometry.coordinates]);
+
+
+	//uses google places to find relevant places.
+	const onLoad = useCallback((map) => {
+		mapRef.current = map;
+
+		// Initialize PlacesService
+		const service = new window.google.maps.places.PlacesService(map);
+
+		// Define parameters for the nearbySearch
+		const request = {
+			location: centroid_memo,
+			radius: '500', // Distance in meters within which to return place results.
+			type: ['restaurant'], // Type of place to search for.
+		};
+
+		// Call nearbySearch and log results
+		service.nearbySearch(request, (results, status) => {
+			if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+				console.log(results); // This will log an array of PlaceResult objects
+			}
+		});
+	}, [centroid_memo]);
+
 	//creates pins given location and
 	//uses memoisation to ensure pin stays in place if map re-renders.
 	const blueMountains = useMemo(() => ({ lat: -33.680640, lng: -209.698501 }), []);
@@ -40,24 +82,13 @@ function Map() {
 	const coogeeBeach = useMemo(() => ({ lat: -33.921355, lng: -208.741788 }), []);
 
 
-	// TODO: add implementation to fetch locations from db
-	//first and last coordinate need to be the same
-	const coordinates = [
-		[-33.680640, -209.698501],
-		[-33.845184, -208.772438],
-		[-33.921355, -208.741788],
-		[-33.680640, -209.698501]
-	];
-
-
-	// finds central point of all the locations
-	var polygon = turf.polygon([coordinates]);
-	var centroid = turf.centroid(polygon);
-	console.log(centroid.geometry.coordinates);
-	const centroid_memo = useMemo(() => ({ lat: centroid.geometry.coordinates[0], lng: centroid.geometry.coordinates[1] }), [centroid.geometry.coordinates]);
-
 	// TODO: make api call for points of interest around the centroid
 	// https://maps.googleapis.com/maps/api/place/nearbysearch/output?parameters
+
+
+
+
+
 
 	return (
 		<>
