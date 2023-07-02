@@ -1,6 +1,6 @@
 import { useMemo, useCallback, useRef, useState } from "react";
 import { renderToString } from "react-dom/server";
-import { GoogleMap, useLoadScript, MarkerF, Circle, usePlaces } from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, MarkerF, Circle } from "@react-google-maps/api";
 import RoomIcon from '@mui/icons-material/Room';
 import * as turf from '@turf/turf'
 
@@ -59,16 +59,6 @@ function Map() {
 	// TODO: make api call for points of interest around the centroid
 	// https://maps.googleapis.com/maps/api/place/nearbysearch/output?parameters
 
-	const { isLoaded: placesLoaded, loadError: placesLoadError } = usePlaces();
-	const placesService = useRef();
-
-	useEffect(() => {
-	  if (placesLoaded) {
-		placesService.current = new window.google.maps.places.PlacesService(mapRef.current.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
-	  }
-	}, [placesLoaded]);
-
-
 
 
 	return (
@@ -88,9 +78,6 @@ function Map() {
 				</GoogleMap>
 			</div>
 			<RoomIcon />
-			{placesLoaded && placesService.current && (
-      			<POIList placesService={placesService.current} center={centroid_memo} />
-    		)}
 		</>
 	)
 }
