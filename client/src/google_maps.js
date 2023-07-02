@@ -45,7 +45,7 @@ function Map() {
 	const coordinates = [
 		[-33.680640, -209.698501],
 		[-33.845184, -208.772438],
-		[-33.921355, -208.741788 ],
+		[-33.921355, -208.741788],
 		[-33.680640, -209.698501]
 	];
 
@@ -54,12 +54,10 @@ function Map() {
 	var polygon = turf.polygon([coordinates]);
 	var centroid = turf.centroid(polygon);
 	console.log(centroid.geometry.coordinates);
-	const centroid_memo = useMemo(() => ({ lat: centroid.geometry.coordinates[0], lng: centroid.geometry.coordinates[1] }), []);
+	const centroid_memo = useMemo(() => ({ lat: centroid.geometry.coordinates[0], lng: centroid.geometry.coordinates[1] }), [centroid.geometry.coordinates]);
 
 	// TODO: make api call for points of interest around the centroid
 	// https://maps.googleapis.com/maps/api/place/nearbysearch/output?parameters
-
-
 
 	return (
 		<>
@@ -72,12 +70,33 @@ function Map() {
 					onLoad={onLoad}
 				>
 					<MarkerF position={blueMountains} label="shubh" />
-					<MarkerF position={northEastHarbour} label="shaam"/>
-					<MarkerF position={coogeeBeach} label="soham"/>
-					<MarkerF position={centroid_memo} label="centroid" icon={yellow_marker} />
+					<MarkerF position={northEastHarbour} label="shaam" />
+					<MarkerF position={coogeeBeach} label="soham" />
+					<Circle center={centroid_memo} radius={15000} options={circleOptions} />
+					<MarkerF
+						position={centroid_memo}
+						label="centroid"
+						icon={yellow_marker}
+					/>
 				</GoogleMap>
 			</div>
-			<RoomIcon />
 		</>
 	)
 }
+
+const defaultOptions = {
+	strokeOpacity: 0.5,
+	strokeWeight: 2,
+	clickable: false,
+	draggable: false,
+	editable: false,
+	visible: true,
+};
+
+const circleOptions = {
+	...defaultOptions,
+	zIndex: 3,
+	fillOpacity: 0.05,
+	strokeColor: "#8BC34A",
+	fillColor: "#8BC34A",
+};

@@ -3,7 +3,7 @@ import {
 } from "@mui/material/styles";
 
 export const appBarHeight = 75;
-export const drawerWIdth = "30%";
+export const drawerWIdth = "25%";
 
 export const primaryColor = "#45dc92";
 
