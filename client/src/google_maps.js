@@ -4,15 +4,11 @@ import { GoogleMap, useLoadScript, MarkerF, Circle } from "@react-google-maps/ap
 import RoomIcon from '@mui/icons-material/Room';
 import * as turf from '@turf/turf'
 
-//temporary->since MUI wasn't working with google maps. consider using advanced markers.
+//TODO: temporary->consider using advanced markers. This looks ugly.
 import yellow_marker from "./yellow_marker.png"
 
 
 export default function OurGoogleMaps() {
-
-
-	console.log("hi")
-	console.log(process.env.REACT_APP_PUBLIC_GOOGLE_MAPS_API_KEY);
 
 	//loads map using Manav's hidden API key.
 	const { isLoaded } = useLoadScript({
@@ -28,25 +24,29 @@ export default function OurGoogleMaps() {
 
 //renders google map using markers.
 function Map() {
-	const [centerPoint, setCenter] = useState({ lat: -33.78827854, lng: -209.5010376 });
-	const mapRef = useRef();
-	const options = useMemo(
-		() => ({
-			disableDefaultUI: true,
-		}),
-		[]
-	);
 
+	const mapRef = useRef();
+	const options = useMemo(() => ({ disableDefaultUI: true,}), []);
 
 	// TODO: add implementation to fetch locations from mongodb
 	//first and last coords need to be the same
+/*
+	const given_users_data = TODO_shubh_function(TODO_url_groupID_string)
+	var curr_users_data = given_users_data
+	var coordinates;
+	for (int i = 0; i < curr_users_data; i++) {
+		coordinates.push(curr_users_data[i].coordinates);
+	}
+	coordinates.push(curr_users_data[0].coordinates);
+*/
 	const coordinates = [
 		[-33.680640, -209.698501],
 		[-33.845184, -208.772438],
 		[-33.921355, -208.741788],
 		[-33.680640, -209.698501]
 	];
-	// finds central point of all the locations
+
+	// finds central point of all the people's locations
 	var polygon = turf.polygon([coordinates]);
 	var centroid = turf.centroid(polygon);
 	console.log(centroid.geometry.coordinates);
@@ -56,38 +56,30 @@ function Map() {
 	//uses google places to find relevant places.
 	const onLoad = useCallback((map) => {
 		mapRef.current = map;
-
-		// Initialize PlacesService
 		const service = new window.google.maps.places.PlacesService(map);
 
-		// Define parameters for the nearbySearch
+		// Define parameters for the nearbySearch.
+		//TODO: get the radius, and event type from form.
 		const request = {
 			location: centroid_memo,
-			radius: '500', // Distance in meters within which to return place results.
-			type: ['restaurant'], // Type of place to search for.
+			radius: '500',
+			type: ['restaurant'],
 		};
 
-		// Call nearbySearch and log results
+		// Call nearbySearch and print results
+		//TODO: currently printing in console, get it to print in sidebar somehow.
 		service.nearbySearch(request, (results, status) => {
 			if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-				console.log(results); // This will log an array of PlaceResult objects
+				console.log(results);
 			}
 		});
 	}, [centroid_memo]);
 
-	//creates pins given location and
-	//uses memoisation to ensure pin stays in place if map re-renders.
+	//creates pins from given coords.
+	//TODO: write these, and their call in the return statement in an array somehow.
 	const blueMountains = useMemo(() => ({ lat: -33.680640, lng: -209.698501 }), []);
 	const northEastHarbour = useMemo(() => ({ lat: -33.845184, lng: -208.772438 }), []);
 	const coogeeBeach = useMemo(() => ({ lat: -33.921355, lng: -208.741788 }), []);
-
-
-	// TODO: make api call for points of interest around the centroid
-	// https://maps.googleapis.com/maps/api/place/nearbysearch/output?parameters
-
-
-
-
 
 
 	return (
@@ -95,7 +87,7 @@ function Map() {
 			<div className="map">
 				<GoogleMap
 					zoom={10}
-					center={centerPoint}
+					center={centroid_memo}
 					mapContainerClassName="map-container"
 					options={options}
 					onLoad={onLoad}
@@ -104,11 +96,7 @@ function Map() {
 					<MarkerF position={northEastHarbour} label="shaam" />
 					<MarkerF position={coogeeBeach} label="soham" />
 					<Circle center={centroid_memo} radius={15000} options={circleOptions} />
-					<MarkerF
-						position={centroid_memo}
-						label="centroid"
-						icon={yellow_marker}
-					/>
+					<MarkerF position={centroid_memo} label="centroid" icon={yellow_marker} />
 				</GoogleMap>
 			</div>
 		</>
